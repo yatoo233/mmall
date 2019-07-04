@@ -76,7 +76,7 @@ public class UserController {
         return iUserService.checkAnswer(username, question, answer);
     }
 
-    @RequestMapping(value="forgetRestPassword.do",method = RequestMethod.GET)
+    @RequestMapping(value="forgetResetPassword.do",method = RequestMethod.GET)
     @ResponseBody
     public ServerResponse<String> forgetRestPassword(String username ,String passwordNew,String forgetToken){
         return iUserService.forgetResetPassword(username,passwordNew,forgetToken);

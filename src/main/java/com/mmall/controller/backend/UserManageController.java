@@ -40,9 +40,4 @@ public class UserManageController {
         return response;
     }
 
-    @RequestMapping(value="aaa")
-    @ResponseBody
-    public String aaa(){
-        return "pass";
-    }
 }
