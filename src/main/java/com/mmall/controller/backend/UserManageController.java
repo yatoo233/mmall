@@ -1,6 +1,7 @@
 package com.mmall.controller.backend;
 
 import com.mmall.common.Const;
+import com.mmall.common.ResponseCode;
 import com.mmall.common.ServerResponse;
 import com.mmall.pojo.User;
 import com.mmall.service.IUserService;
@@ -19,11 +20,10 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/manage/user")
 public class UserManageController {
-
     @Autowired
-    private IUserService iUserService;
+    private  IUserService iUserService;
 
-    @RequestMapping(value="login.do",method = RequestMethod.POST)
+    @RequestMapping(value="login.do",method = RequestMethod.GET)
     @ResponseBody
     public ServerResponse<User> login(String username, String password, HttpSession session){
         ServerResponse<User> response = iUserService.login(username,password);
@@ -34,10 +34,15 @@ public class UserManageController {
                 session.setAttribute(Const.CURRENT_USER,user);
                 return response;
             }else{
-                return ServerResponse.createByErrorMessage("不是管理员,无法登录");
+                return ServerResponse.createByErrorCodeMessage(ResponseCode.ILLEGAL_ARGUMENT.getCode(),"不是管理员,无法登录");
             }
         }
         return response;
     }
 
+    @RequestMapping(value="aaa")
+    @ResponseBody
+    public String aaa(){
+        return "pass";
+    }
 }

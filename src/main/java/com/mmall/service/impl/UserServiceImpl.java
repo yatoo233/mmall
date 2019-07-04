@@ -40,8 +40,6 @@ public class UserServiceImpl implements IUserService {
         return ServerResponse.createBySuccess("登录成功",user);
     }
 
-
-
     public ServerResponse<String> register(User user){
         ServerResponse validResponse = this.checkValid(user.getUsername(),Const.USERNAME);
         if(!validResponse.isSuccess()){
@@ -107,8 +105,6 @@ public class UserServiceImpl implements IUserService {
         return ServerResponse.createByErrorMessage("问题的答案错误");
     }
 
-
-
     public ServerResponse<String> forgetResetPassword(String username,String passwordNew,String forgetToken){
         if(org.apache.commons.lang3.StringUtils.isBlank(forgetToken)){
             return ServerResponse.createByErrorMessage("参数错误,token需要传递");
@@ -136,7 +132,6 @@ public class UserServiceImpl implements IUserService {
         return ServerResponse.createByErrorMessage("修改密码失败");
     }
 
-
     public ServerResponse<String> resetPassword(String passwordOld,String passwordNew,User user){
         //防止横向越权,要校验一下这个用户的旧密码,一定要指定是这个用户.因为我们会查询一个count(1),如果不指定id,那么结果就是true啦count>0;
         int resultCount = userMapper.checkPassword(MD5Util.MD5EncodeUtf8(passwordOld),user.getId());
@@ -151,7 +146,6 @@ public class UserServiceImpl implements IUserService {
         }
         return ServerResponse.createByErrorMessage("密码更新失败");
     }
-
 
     public ServerResponse<User> updateInformation(User user){
         //username是不能被更新的
